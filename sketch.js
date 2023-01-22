@@ -12,46 +12,53 @@ function flower() {
 		console.log(m);
 	}
 
+	let h = hour();
+	if (h > 12) {
+		h = h % 12;
+	}
+
 	translate(windowWidth / 2, windowHeight / 2);
 	// brown center of sunflower
 	stroke(92, 64, 51);
 	strokeWeight(4);
 	fill(123, 63, 0);
 	ellipse(0, 0, 180, 180);
+	// sunflower stem
+	stroke(0, 153, 51);
+	strokeWeight(4);
+	fill(0, 204, 68);
+	rect(0, 90, 10, 300);
 
-	// petals for each hour
-	for (var t = 0; t < 12; t++) {
-		if (hour() % 12 == t - 6 || hour() % 12 == t + 6) {
-			// hour petal
-			strokeWeight(2);
-			stroke(255, 255, 179);
-			fill(255, 255, 179);
-			ellipse(0, 220, 100, 250);
-
-			// minutes petal
-			strokeWeight(1);
-			stroke(251, 236, 93);
-			fill(251, 236, 93);
-			minutesy = 95 + 125 * minute() / 60;
-			minutesh = 250 * minute() / 60;
-			ellipse(0, minutesy, 100 * minute() / 60, minutesh);
-			
-			// seconds petal
-			stroke(255, 192, 0);
-			fill(255, 192, 0);
-			secondy = minutesy - (minutesh / 2) + (minutesh / 2) * (second() / 60);
-			secondh = minutesh * second() / 60;
-			ellipse(0, secondy, 100 * minute() / 60 * second()/ 60, secondh);
-		} else {
-			// hour petal
-			strokeWeight(2);
-			stroke(255, 255, 179);
-			fill(255, 192, 0);
-			ellipse(0, 220, 100, 250);
-		}
-
+	// display petals for the hours that have passed
+	for (var t = 0; t < h; t++) {
+		strokeWeight(2);
+		stroke(255, 255, 179);
+		fill(255, 192, 0);
+		ellipse(0, -220, 100, 250);
 		rotate(PI / 6);
 	}
+
+	// display petal for current hour
+	// hour petal
+	strokeWeight(2);
+	stroke(255, 255, 179);
+	fill(255, 255, 179);
+	ellipse(0, -220, 100, 250);
+
+	// minutes petal
+	strokeWeight(1);
+	stroke(251, 236, 93);
+	fill(251, 236, 93);
+	minutesy = 95 + 125 * minute() / 60;
+	minutesh = 250 * minute() / 60;
+	ellipse(0, -minutesy, 100 * minute() / 60, minutesh);
+	
+	// seconds petal
+	stroke(255, 192, 0);
+	fill(255, 192, 0);
+	secondy = minutesy - (minutesh / 2) + (minutesh / 2) * (second() / 60);
+	secondh = minutesh * second() / 60;
+	ellipse(0, -secondy, 100 * minute() / 60 * second()/ 60, secondh);
 }
 
 function draw() {
